@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="auth-wrapper">
+        <div class="auth-form-container">
+            <h2 class="auth-heading">{{ title }}</h2>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                <div class="auth-form-group">
+                    {{ form.username.label }} {{ form.username(class="form-control") }}
+                    {% for error in form.username.errors %}
+                        <div class="auth-form-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                {% if form.email %}
+                <div class="auth-form-group">
+                    {{ form.email.label }} {{ form.email(class="form-control") }}
+                    {% for error in form.email.errors %}
+                        <div class="auth-form-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="auth-form-group">
+                    {{ form.password.label }} {{ form.password(class="form-control") }}
+                    {% for error in form.password.errors %}
+                        <div class="auth-form-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                {% if form.confirm_password %}
+                <div class="auth-form-group">
+                    {{ form.confirm_password.label }} {{ form.confirm_password(class="form-control") }}
+                    {% for error in form.confirm_password.errors %}
+                        <div class="auth-form-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <button type="submit" class="auth-submit-btn mt-3">{{ button_text }}</button>
+            </form>
+            <p class="auth-link-text mt-3">{{ link_text }} <a href="{{ link_url }}" class="auth-link">{{ link_label }}</a></p>
+        </div>
+    </div>
+{% endblock %}

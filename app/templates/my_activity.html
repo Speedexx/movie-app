@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="my-activity">
+        <h2 class="mb-4">My Activity</h2>
+
+        <h4>My Comments</h4>
+        {% if comments %}
+            <ul class="list-group mb-4">
+                {% for comment in comments %}
+                    <li class="list-group-item">
+                        <strong>{{ comment.movie.title }}</strong><br>
+                        <small class="text-muted">{{ comment.created_at.strftime('%Y-%m-%d %H:%M') }}</small><br>
+                        {{ comment.content }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No comments yet.</p>
+        {% endif %}
+
+        <h4>My Ratings</h4>
+        {% if ratings %}
+            <ul class="list-group">
+                {% for rating in ratings %}
+                    <li class="list-group-item">
+                        <strong>{{ rating.movie.title }}</strong><br>
+                        <small class="text-muted">{{ rating.created_at.strftime('%Y-%m-%d %H:%M') }}</small><br>
+                        Rating: {{ rating.rating }}/5
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No ratings yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

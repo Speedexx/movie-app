@@ -1,0 +1,42 @@
+// Zmienne
+$background-color: #f4f4f4;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.page-body {
+  font-family: Arial, sans-serif;
+  background-color: $background-color;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-navbar {
+  box-shadow: $box-shadow;
+}
+
+.navbar-logo {
+  font-weight: bold;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding-top: 1rem;
+}
+
+.main-footer {
+  margin-top: auto;
+  font-size: 0.9rem;
+  background-color: #222;
+}
+
+.footer-text {
+  margin: 0;
+  color: #ccc;
+}

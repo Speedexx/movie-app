@@ -1,0 +1,99 @@
+.movies-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movies-list-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.movies-gallery {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 30px 0;
+}
+
+.movies-post-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.movies-post {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.movies-post:hover {
+  transform: scale(1.03);
+}
+
+.movies-thumbnail {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movies-post-info {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.movies-post-title {
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.movies-post-meta {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.movies-post-rating {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 5px;
+  color: #333;
+}
+
+.movies-post-rating.text-muted {
+  color: #aaa;
+}
+
+.btn-outline-primary {
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.manage-post {
+  position: relative;
+
+  .manage-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+
+    .btn {
+      flex: 1;
+    }
+  }
+
+  .movies-post-title {
+    text-align: center;
+  }
+}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="movies-wrapper">
+        <h1 class="movies-list-title">Manage Movies</h1>
+
+        <a href="{{ url_for('movie.add_movie') }}" class="btn btn-primary mb-4">Add New Movie</a>
+
+        <div class="movies-gallery">
+            {% for movie in movies %}
+                <div class="movies-post manage-post">
+                    <img src="{{ url_for('static', filename='img/' + movie.image) }}" alt="{{ movie.title }}" class="movies-thumbnail">
+                    <div class="movies-post-info">
+                        <h5 class="movies-post-title text-center">{{ movie.title }}</h5>
+                        <p class="movies-post-meta"><strong>Genre:</strong> {{ movie.genre }}</p>
+                        <p class="movies-post-meta"><strong>Year:</strong> {{ movie.year }}</p>
+                        <p class="movies-post-rating"><strong>Rating:</strong> {{ movie.rating }} / 10</p>
+                        <div class="manage-actions">
+                            <a href="{{ url_for('movie.edit_movie', movie_id=movie.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{{ url_for('movie.delete_movie', movie_id=movie.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

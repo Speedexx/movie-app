@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="movie-details-container">
+    <h1 class="movie-title">{{ movie.title }}</h1>
+    <img src="{{ url_for('static', filename='img/' + movie.image) }}" class="movie-image" alt="{{ movie.title }}">
+
+    <div class="movie-info">
+        <p><strong>Genre:</strong> {{ movie.genre }}</p>
+        <p><strong>Year:</strong> {{ movie.year }}</p>
+    </div>
+
+    <h2 class="movie-description-title">Description</h2>
+    <p class="movie-description">{{ movie.description if movie.description else 'No description available.' }}</p>
+
+    <h3 class="average-rating">
+        Average Rating:
+        {% if movie.movie_ratings %}
+            <span class="badge bg-success">{{ movie.average_rating()|round(2) }} / 5.0</span>
+        {% else %}
+            <span class="text-muted">No ratings yet</span>
+        {% endif %}
+    </h3>
+
+    <div class="rating-group">
+        <div class="rating-section">
+            <h3 class="add-rating-title">Rate this movie</h3>
+            <form method="POST" action="{{ url_for('main.movie_details', movie_id=movie.id) }}">
+                {{ rating_form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="rating" class="form-label">{{ rating_form.rating.label }}</label>
+                    <div>
+                        {{ rating_form.rating(id="rating", class="form-control", min=1, max=5) }}
+                    </div>
+                </div>
+                <button type="submit" id="submit_rating" name="submit_rating" class="btn btn-warning"
+                        value="{{ 'update_rating' if existing_rating else 'submit_rating' }}">
+                    {{ 'Update Rating' if existing_rating else 'Submit Rating' }}
+                </button>
+            </form>
+            {% if existing_rating %}
+                <p class="text-muted mt-1">You rated this movie: <strong>{{ existing_rating.rating }}/5</strong></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="comments-group">
+        <h2 class="comments-title">Comments</h2>
+        {% if comments %}
+            <div class="comments-list">
+                {% for comment in comments %}
+                    <div class="comment">
+                        <strong class="comment-user">{{ comment.user.username }}</strong>
+                        <span class="comment-date text-muted">({{ comment.created_at.strftime('%Y-%m-%d %H:%M') }})</span>
+                        <p class="comment-content">{{ comment.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-comments">No comments yet. Be the first to comment!</p>
+        {% endif %}
+    </div>
+
+    <div class="add-comment-group">
+        <h3 class="add-comment-title">Add a Comment</h3>
+        <form method="POST" action="{{ url_for('main.movie_details', movie_id=movie.id) }}" class="comment-form">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.content.label }}
+                {{ form.content(class="form-control", rows=3) }}
+            </div>
+            {{ form.submit_comment(class="btn btn-primary") }}
+        </form>
+    </div>
+</div>
+{% endblock %}

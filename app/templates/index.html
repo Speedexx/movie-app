@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="home-wrapper">
+    <h1 class="home-heading">Welcome to Movie App</h1>
+    <p class="home-subtext">Check out the latest movies reviewed by our community:</p>
+
+    <div class="home-movie-gallery">
+        {% for movie in movies if movie.movie_ratings or movie.comments %}
+            <div class="movie-post">
+                <img src="{{ url_for('static', filename='img/' + movie.image) }}" alt="{{ movie.title }}" class="home-movie-thumbnail">
+                <div class="movie-post-info">
+                    <h5 class="movie-post-title">{{ movie.title }}</h5>
+                    <p class="movie-post-meta">{{ movie.genre }} | {{ movie.year }}</p>
+                    <p class="movie-post-description">
+                        {{ movie.description[:100] }}{% if movie.description|length > 100 %}...{% endif %}
+                    </p>
+                    {% if movie.movie_ratings %}
+                        <p class="movie-post-rating">
+                            ⭐ {{ movie.average_rating()|round(2) }} / 5
+                        </p>
+                    {% else %}
+                        <p class="movie-post-rating text-muted">No ratings yet</p>
+                    {% endif %}
+                    <a href="{{ url_for('main.movie_details', movie_id=movie.id) }}" class="btn btn-sm btn-outline-primary mt-2">Read More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

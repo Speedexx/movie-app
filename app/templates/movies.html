@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="movies-wrapper">
+        <h1 class="movies-list-title">Movies List</h1>
+
+        <div class="movies-gallery">
+            {% for movie in movies %}
+                    <div class="movies-post">
+                        <img src="{{ url_for('static', filename='img/' + movie.image) }}" alt="{{ movie.title }}" class="movies-thumbnail">
+                        <div class="movies-post-info">
+                            <h5 class="movies-post-title">{{ movie.title }}</h5>
+                            <p class="movies-post-meta">{{ movie.genre }} | {{ movie.year }}</p>
+                            <p class="movies-post-description">
+                                {{ movie.description[:100] }}{% if movie.description|length > 100 %}...{% endif %}
+                            </p>
+                            {% if movie.movie_ratings %}
+                                <p class="movies-post-rating">
+                                    ⭐ {{ movie.average_rating()|round(2) }} / 5
+                                </p>
+                            {% else %}
+                                <p class="movies-post-rating text-muted">No ratings yet</p>
+                            {% endif %}
+                            <a href="{{ url_for('main.movie_details', movie_id=movie.id) }}" class="btn btn-sm btn-outline-primary mt-2">Read More</a>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
