@@ -35,12 +35,7 @@ pip install -r requirements.txt
 
 ```bash
 Zainicjalizuj bazę danych:  
-python
->>> from app import db, create_app
->>> app = create_app()
->>> app.app_context().push()
->>> db.create_all()
->>> exit()
+python init_db.py
 ```
 
 ```bash
