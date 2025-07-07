@@ -56,7 +56,7 @@ Aby uruchomić aplikację za pomocą Dockera, wykonaj następujące kroki:
 
 ```bash
 Sklonuj repozytorium z GitHub:  
-git clone https://github.com/TwojeKonto/MovieApp.git
+git clone https://github.com/Speedexx/movie-app.git
 cd MovieApp
 ```
 
